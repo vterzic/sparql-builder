@@ -37,6 +37,24 @@ SELECT * WHERE {
   }
 }`;
 
+const doubleNestedQuery = `PREFIX schema: <http://schema.org/>
+SELECT * WHERE {
+  {
+    SELECT * WHERE {
+      {
+        SELECT ?s WHERE {
+          ?s schema:name 'sparql-builder' .
+        }
+      }
+    }
+  }
+  {
+    SELECT * WHERE {
+      ?b schema:builder 'simple-query-builder' .
+    }
+  }
+}`;
+
 export default {
   simpleSelect,
   simpleSelectPredicateObject,
@@ -47,4 +65,5 @@ export default {
   simpleOptionalQuery,
   simpleSelectWithPrefix,
   simpleNestedQuery,
+  doubleNestedQuery,
 };

@@ -15,7 +15,6 @@ describe('Select query suite', () => {
 
   it('generates simple predicate/object select query with 1 statement', () => {
     const q = new Select().select('p', 'o').where('s', 'p', 'o');
-    console.log(q.render());
     expect(q.render()).to.be.equal(queries.simpleSelectPredicateObject);
   });
 
@@ -68,8 +67,29 @@ describe('Select query suite', () => {
       .nest(
         new Select().select('s').where('s', 'schema:name', Op.toStringLiteral('sparql-builder')),
       );
-    console.log(q.render());
-    console.log(queries.simpleNestedQuery);
+
     expect(q.render()).to.be.equal(queries.simpleNestedQuery);
+  });
+
+  it('double nests query inside of parent query', () => {
+    const q = new Select()
+      .prefix(Op.prefix('schema', 'http://schema.org/'))
+      .select('*')
+      .nest(
+        new Select()
+          .select('*')
+          .nest(
+            new Select()
+              .select('s')
+              .where('s', 'schema:name', Op.toStringLiteral('sparql-builder')),
+          ),
+      )
+      .nest(
+        new Select()
+          .select('*')
+          .where('b', 'schema:builder', Op.toStringLiteral('simple-query-builder')),
+      );
+
+    expect(q.render()).to.be.equal(queries.doubleNestedQuery);
   });
 });
