@@ -1,4 +1,4 @@
-import SelectQuery from './queries/select-query';
+import SelectQuery from './select-query';
 
 const select = () => {
   return new SelectQuery();

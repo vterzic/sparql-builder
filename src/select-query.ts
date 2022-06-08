@@ -1,5 +1,5 @@
-import util from '../util';
-import Optional from '../optional';
+import util from './util';
+import Optional from './optional';
 
 export default class SelectQuery {
   private readonly SELECT_KEYWORD = 'SELECT';

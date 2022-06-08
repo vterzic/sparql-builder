@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import queries from './util/queries';
 import Op from '../src/operators';
 
-import Select from '../src/queries/select-query';
+import Select from '../src/select-query';
 import Optional from '../src/optional';
 
 describe('Select query suite', () => {
