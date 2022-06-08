@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import Optional from '../src/optional';
+import Optional from '../lib/core/optional';
 
 describe('Optional suite', () => {
   it('renders optional graph pattern', () => {

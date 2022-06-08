@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import Op from '../src/operators';
+import Op from '../lib/core/operators';
 
 describe('Util suite', () => {
   it('wraps variable into ASC()', () => {

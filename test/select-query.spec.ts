@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 import queries from './util/queries';
-import Op from '../src/operators';
+import Op from '../lib/core/operators';
 
-import Select from '../src/select-query';
-import Optional from '../src/optional';
+import Select from '../lib/core/select-query';
+import Optional from '../lib/core/optional';
 
 describe('Select query suite', () => {
   const urnUuid = 'urn:uuid:1f6a009f-2028-46b2-ad6b-a3f3e6cb7b11';

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import Util from '../src/util';
+import Util from '../lib/core/util';
 describe('Util suite', () => {
   it('appends question mark to variable name', () => {
     expect(Util.getQueryString('varName')).to.be.eq('?varName');
