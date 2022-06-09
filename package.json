@@ -2,9 +2,11 @@
   "name": "sparql-builder",
   "version": "0.1.0",
   "description": "Just a simple SPARQL query builder",
-  "main": "lib/sparql-builder.ts",
+  "main": "dist/sparql-builder.js",
+  "types": "dist/sparql-builder.d.ts",
   "author": "",
   "license": "SEE LICENSE IN LICENSE.md",
+  "files": ["/dist"],
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.spec.ts",
     "test:watch": "mocha -r ts-node/register test/**/*.spec.ts --watch --extension ts",
