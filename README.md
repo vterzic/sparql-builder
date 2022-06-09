@@ -1,10 +1,14 @@
-# simple-sparql-builder
+# sparql-builder
 
-Just a simple library for creating SPARQL queries.
+Just a simple, zero-dependency library for creating SPARQL queries.
 
 ## Motivation
 
-This library is made for personal usage in order to speed up development process for creating SPARQL queries.
+This library is made for personal usage in order to speed up development process 
+when creating SPARQL queries.
+
+## Examples
+Examples can be found in ./test
 
 ## TODO
 
