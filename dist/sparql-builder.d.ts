@@ -1,7 +1,7 @@
 import Optional from './core/optional';
 import SelectQuery from './core/select-query';
-declare const _default: {
-    selectQuery: () => SelectQuery;
-    optional: () => Optional;
-};
-export default _default;
+declare class SparqlBuilder {
+    static selectQuery(): SelectQuery;
+    static optional(): Optional;
+}
+export = SparqlBuilder;
