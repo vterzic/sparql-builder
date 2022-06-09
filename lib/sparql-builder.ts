@@ -1,12 +1,14 @@
 import Optional from './core/optional';
 import SelectQuery from './core/select-query';
 
-const select = () => {
+const selectQuery = () => {
   return new SelectQuery();
 };
+
+// TODO construct update
 
 const optional = () => {
   return new Optional();
 };
 
-export default { select, optional };
+export default { selectQuery, optional };

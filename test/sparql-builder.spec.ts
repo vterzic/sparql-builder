@@ -5,7 +5,7 @@ import sparqlBuilder from '../lib/sparql-builder';
 
 describe('sparql-builder suite', () => {
   it('creates SelectQuery instance', () => {
-    const instance = sparqlBuilder.select();
+    const instance = sparqlBuilder.selectQuery();
     expect(instance).to.be.instanceOf(SelectQuery);
   });
 
