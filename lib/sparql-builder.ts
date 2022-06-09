@@ -1,14 +1,14 @@
 import Optional from './core/optional';
 import SelectQuery from './core/select-query';
 
-class SparqlBuilder {
-  public static selectQuery(): SelectQuery {
-    return new SelectQuery();
-  }
+const selectQuery = (): SelectQuery => {
+  return new SelectQuery();
+};
 
-  public static optional(): Optional {
-    return new Optional();
-  }
-}
+// TODO construct update
 
-export = SparqlBuilder;
+const optional = (): Optional => {
+  return new Optional();
+};
+
+export = { selectQuery, optional };
