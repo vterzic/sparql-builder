@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "ES2021",
+    "declaration": true,
+    "target": "ES6",
     "noImplicitAny": true,
     "outDir": "dist",
     "baseUrl": "."
   },
-  "include": ["lib/**/*.ts", "test/**/*.ts"],
+  "include": ["lib/**/*.ts"],
   "exclude": ["node_modules"]
 }
