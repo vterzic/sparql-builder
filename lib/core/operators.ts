@@ -26,8 +26,13 @@ const prefix = (prefix: string, iriVal: string): string => {
   return `PREFIX ${prefix}: ${iri(iriVal)}`;
 };
 
-const toStringLiteral = (value: string) => {
+const toStringLiteral = (value: string): string => {
   return `'${value}'`;
 };
 
-export default { asc, desc, iri, ifFunc, prefix, toStringLiteral };
+const sum = (expression: string, variableName: string): string => {
+  const variable = variableName.startsWith('?') ? variableName : `?${variableName}`;
+  return `(SUM(${expression}) as ${variable})`;
+};
+
+export default { asc, desc, iri, ifFunc, prefix, toStringLiteral, sum };

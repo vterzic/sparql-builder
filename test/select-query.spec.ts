@@ -4,6 +4,7 @@ import Op from '../lib/core/operators';
 
 import Select from '../lib/core/select-query';
 import Optional from '../lib/core/optional';
+import SelectQuery from '../lib/core/select-query';
 
 describe('Select query suite', () => {
   const urnUuid = 'urn:uuid:1f6a009f-2028-46b2-ad6b-a3f3e6cb7b11';
@@ -91,5 +92,16 @@ describe('Select query suite', () => {
       );
 
     expect(q.render()).to.be.equal(queries.doubleNestedQuery);
+  });
+
+  it('generates group by query', () => {
+    const q = new SelectQuery()
+      .prefix(Op.prefix('schema', 'http://schema.org/'))
+      .select('location', Op.sum('?value1 * ?value2', 'totalSum'))
+      .where('location', 'schema:humidity', 'value1')
+      .where('location', 'schema:temperature', 'value2')
+      .groupBy('location');
+
+    expect(q.render()).to.be.equal(queries.groupByQuery);
   });
 });

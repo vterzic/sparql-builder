@@ -4,7 +4,7 @@ import Optional from './optional';
 export default class SelectQuery {
   private readonly SELECT_KEYWORD = 'SELECT';
   private prefixes: string[] = [];
-  private selectVariables: string[];
+  private selectVariables: string[] = [];
   private graphPattern: Array<Array<string>> = [];
   private orderByValues: string[] = [];
   private offsetValue: number;
@@ -12,6 +12,7 @@ export default class SelectQuery {
   private bindVariables: string[] = [];
   private optionals: Optional[] = [];
   private subQueries: SelectQuery[] = [];
+  private groupByCriteria: string[] = [];
 
   constructor() {
     return this;
@@ -62,12 +63,18 @@ export default class SelectQuery {
     return this;
   }
 
+  groupBy(...groupByCriteria: string[]): SelectQuery {
+    this.groupByCriteria = groupByCriteria;
+    return this;
+  }
+
   render(): string {
     return (
       this.getPrefixes() +
       this.SELECT_KEYWORD +
       this.getSelectVariables() +
       this.getGraphPattern() +
+      this.getGroupByCriteria() +
       this.getOrderBy() +
       this.getOffset() +
       this.getLimit()
@@ -148,6 +155,20 @@ export default class SelectQuery {
     }
 
     return '';
+  }
+
+  private getGroupByCriteria(): string {
+    if (!this.groupByCriteria.length) {
+      return '';
+    }
+
+    let groupBy = ' GROUP BY';
+
+    for (const c of this.groupByCriteria) {
+      groupBy += ' ' + util.getQueryString(c);
+    }
+
+    return groupBy;
   }
 
   private getOrderBy(): string {

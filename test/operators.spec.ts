@@ -31,4 +31,8 @@ describe('Util suite', () => {
   it('wraps string in single quotes (makes string literal)', () => {
     expect(Op.toStringLiteral('value')).to.be.equal("'value'");
   });
+
+  it('creates (SUM(?var1*?var2) as ?totalSum) expression', () => {
+    expect(Op.sum('?var1*?var2', '?totalSum')).to.be.eq('(SUM(?var1*?var2) as ?totalSum)');
+  });
 });

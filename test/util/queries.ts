@@ -55,6 +55,12 @@ SELECT * WHERE {
   }
 }`;
 
+const groupByQuery = `PREFIX schema: <http://schema.org/>
+SELECT ?location (SUM(?value1 * ?value2) as ?totalSum) WHERE {
+  ?location schema:humidity ?value1 .
+  ?location schema:temperature ?value2 .
+} GROUP BY ?location`;
+
 export default {
   simpleSelect,
   simpleSelectPredicateObject,
@@ -66,4 +72,5 @@ export default {
   simpleSelectWithPrefix,
   simpleNestedQuery,
   doubleNestedQuery,
+  groupByQuery,
 };
