@@ -32,4 +32,10 @@ describe('Util suite', () => {
 
     expect(Util.indentString(input)).to.be.eq(expected);
   });
+
+  it('considers (SUM(?something) as ?summed) as expression', () => {
+    const expression = '(SUM(?something) as ?summed)';
+
+    expect(Util.isExpression(expression)).to.be.true;
+  });
 });
