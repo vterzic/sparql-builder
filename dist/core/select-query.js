@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const util_1 = require("./util");
+const util_1 = __importDefault(require("./util"));
 class SelectQuery {
     constructor() {
         this.SELECT_KEYWORD = 'SELECT';
@@ -12,7 +15,6 @@ class SelectQuery {
         this.optionals = [];
         this.subQueries = [];
         this.groupByCriteria = [];
-        return this;
     }
     prefix(prefix) {
         this.prefixes.push(prefix);
@@ -46,8 +48,8 @@ class SelectQuery {
         this.optionals.push(optional);
         return this;
     }
-    nest(subQuery) {
-        this.subQueries.push(subQuery);
+    nest(subQuery, type = 'REGULAR') {
+        this.subQueries.push({ subQuery, type });
         return this;
     }
     groupBy(...groupByCriteria) {
@@ -162,11 +164,21 @@ class SelectQuery {
         }
         let nested = '';
         for (const subQuery of this.subQueries) {
-            nested += '\n' + util_1.default.IDENTATION + '{\n';
-            nested += util_1.default.indentString(subQuery.render(), util_1.default.DOUBLE_INDENTATION);
+            nested += this.getFirstLine(subQuery.type);
+            nested += util_1.default.indentString(subQuery.subQuery.render(), util_1.default.DOUBLE_INDENTATION);
             nested += '\n' + util_1.default.IDENTATION + '}';
         }
         return nested;
+    }
+    getFirstLine(type) {
+        switch (type) {
+            case 'REGULAR':
+                return '\n' + util_1.default.IDENTATION + '{\n';
+            case 'OPTIONAL':
+                return '\n' + util_1.default.IDENTATION + 'OPTIONAL {\n';
+            case 'UNION':
+                return '\n' + util_1.default.IDENTATION + 'UNION\n' + util_1.default.IDENTATION + '{\n';
+        }
     }
 }
 exports.default = SelectQuery;
