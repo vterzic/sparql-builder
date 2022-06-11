@@ -1,7 +1,8 @@
 import Optional from './core/optional';
 import SelectQuery from './core/select-query';
-declare const _default: {
+import operators from './core/operators';
+declare const builder: {
     selectQuery: () => SelectQuery;
     optional: () => Optional;
 };
-export = _default;
+export { builder, operators };
