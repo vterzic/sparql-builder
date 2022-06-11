@@ -5,7 +5,8 @@
     "target": "ES6",
     "noImplicitAny": true,
     "outDir": "dist",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "esModuleInterop": true
   },
   "include": ["lib/**/*.ts"],
   "exclude": ["node_modules"]
