@@ -1,6 +1,7 @@
 import util from './util';
 import Optional from './optional';
 
+type nestedType = 'REGULAR' | 'OPTIONAL' | 'UNION';
 export default class SelectQuery {
   private readonly SELECT_KEYWORD = 'SELECT';
   private prefixes: string[] = [];
@@ -11,12 +12,8 @@ export default class SelectQuery {
   private limitValue: number;
   private bindVariables: string[] = [];
   private optionals: Optional[] = [];
-  private subQueries: SelectQuery[] = [];
+  private subQueries: Array<{ subQuery: SelectQuery; type: nestedType }> = [];
   private groupByCriteria: string[] = [];
-
-  constructor() {
-    return this;
-  }
 
   prefix(prefix: string): SelectQuery {
     this.prefixes.push(prefix);
@@ -58,8 +55,8 @@ export default class SelectQuery {
     return this;
   }
 
-  nest(subQuery: SelectQuery): SelectQuery {
-    this.subQueries.push(subQuery);
+  nest(subQuery: SelectQuery, type: nestedType = 'REGULAR'): SelectQuery {
+    this.subQueries.push({ subQuery, type });
     return this;
   }
 
@@ -215,11 +212,22 @@ export default class SelectQuery {
     let nested = '';
 
     for (const subQuery of this.subQueries) {
-      nested += '\n' + util.IDENTATION + '{\n';
-      nested += util.indentString(subQuery.render(), util.DOUBLE_INDENTATION);
+      nested += this.getFirstLine(subQuery.type);
+      nested += util.indentString(subQuery.subQuery.render(), util.DOUBLE_INDENTATION);
       nested += '\n' + util.IDENTATION + '}';
     }
 
     return nested;
+  }
+
+  private getFirstLine(type: nestedType) {
+    switch (type) {
+      case 'REGULAR':
+        return '\n' + util.IDENTATION + '{\n';
+      case 'OPTIONAL':
+        return '\n' + util.IDENTATION + 'OPTIONAL {\n';
+      case 'UNION':
+        return '\n' + util.IDENTATION + 'UNION\n' + util.IDENTATION + '{\n';
+    }
   }
 }

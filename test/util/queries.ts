@@ -61,6 +61,35 @@ SELECT ?location (SUM(?value1 * ?value2) as ?totalSum) WHERE {
   ?location schema:temperature ?value2 .
 } GROUP BY ?location`;
 
+const unionQuery = `PREFIX schema: <http://schema.org/>
+SELECT * WHERE {
+  {
+    SELECT ?s WHERE {
+      ?s schema:name 'example1' .
+    }
+  }
+  UNION
+  {
+    SELECT ?s WHERE {
+      ?s schema:lastName 'example2' .
+    }
+  }
+}`;
+
+const optionalQuery = `PREFIX schema: <http://schema.org/>
+SELECT * WHERE {
+  {
+    SELECT ?s WHERE {
+      ?s schema:name 'example1' .
+    }
+  }
+  OPTIONAL {
+    SELECT ?s WHERE {
+      ?s schema:lastName 'example2' .
+    }
+  }
+}`;
+
 export default {
   simpleSelect,
   simpleSelectPredicateObject,
@@ -73,4 +102,6 @@ export default {
   simpleNestedQuery,
   doubleNestedQuery,
   groupByQuery,
+  unionQuery,
+  optionalQuery,
 };

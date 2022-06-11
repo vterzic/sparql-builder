@@ -104,4 +104,38 @@ describe('Select query suite', () => {
 
     expect(q.render()).to.be.equal(queries.groupByQuery);
   });
+
+  it('generates union of two subqueries', () => {
+    const subQuery1 = new SelectQuery()
+      .select('s')
+      .where('s', 'schema:name', Op.toStringLiteral('example1'));
+    const subQuery2 = new SelectQuery()
+      .select('s')
+      .where('s', 'schema:lastName', Op.toStringLiteral('example2'));
+
+    const q = new SelectQuery()
+      .prefix(Op.prefix('schema', 'http://schema.org/'))
+      .select('*')
+      .nest(subQuery1)
+      .nest(subQuery2, 'UNION');
+
+    expect(q.render()).to.be.eq(queries.unionQuery);
+  });
+
+  it('generates two subqueries where one is optional', () => {
+    const subQuery1 = new SelectQuery()
+      .select('s')
+      .where('s', 'schema:name', Op.toStringLiteral('example1'));
+    const subQuery2 = new SelectQuery()
+      .select('s')
+      .where('s', 'schema:lastName', Op.toStringLiteral('example2'));
+
+    const q = new SelectQuery()
+      .prefix(Op.prefix('schema', 'http://schema.org/'))
+      .select('*')
+      .nest(subQuery1)
+      .nest(subQuery2, 'OPTIONAL');
+
+    expect(q.render()).to.be.eq(queries.optionalQuery);
+  });
 });
