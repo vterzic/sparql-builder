@@ -1,14 +1,16 @@
 import Optional from './core/optional';
 import SelectQuery from './core/select-query';
+import operators from './core/operators';
 
-const selectQuery = (): SelectQuery => {
-  return new SelectQuery();
+const builder = {
+  selectQuery: (): SelectQuery => {
+    return new SelectQuery();
+  },
+  optional: (): Optional => {
+    return new Optional();
+  },
 };
 
 // TODO construct update
 
-const optional = (): Optional => {
-  return new Optional();
-};
-
-export = { selectQuery, optional };
+export { builder, operators };
