@@ -4,7 +4,7 @@ Just a simple, zero-dependency library for creating SPARQL queries.
 
 ## Motivation
 
-This library was made for fun and mostly personal usage in order to speed up development process when creation of SPARQL queries is needed.
+This library was made in order to speed up development process when creation of SPARQL queries is needed.
 
 ## TODO
 
