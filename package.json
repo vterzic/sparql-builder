@@ -1,13 +1,22 @@
 {
-  "name": "sparql-builder",
+  "name": "@vterzic/sparql-builder",
   "version": "0.1.0",
   "description": "Just a simple SPARQL query builder",
   "main": "dist/sparql-builder.js",
   "types": "dist/sparql-builder.d.ts",
   "author": "Veljko Terzic",
-  "keywords": ["SPARQL", "builder", "RDF", "rdf", "graph", "Graph"],
+  "keywords": [
+    "SPARQL",
+    "builder",
+    "RDF",
+    "rdf",
+    "graph",
+    "Graph"
+  ],
   "license": "SEE LICENSE IN LICENSE.md",
-  "files": ["/dist"],
+  "files": [
+    "/dist"
+  ],
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.spec.ts",
     "test:watch": "mocha -r ts-node/register test/**/*.spec.ts --watch --extension ts",
@@ -31,5 +40,17 @@
     "prettier": "^2.6.2",
     "ts-node": "^10.8.0",
     "typescript": "^4.7.2"
-  }
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vterzic/sparql-builder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vterzic/sparql-builder/issues"
+  },
+  "homepage": "https://github.com/vterzic/sparql-builder#readme"
 }
