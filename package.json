@@ -4,7 +4,8 @@
   "description": "Just a simple SPARQL query builder",
   "main": "dist/sparql-builder.js",
   "types": "dist/sparql-builder.d.ts",
-  "author": "",
+  "author": "Veljko Terzic",
+  "keywords": ["SPARQL", "builder", "RDF", "rdf", "graph", "Graph"],
   "license": "SEE LICENSE IN LICENSE.md",
   "files": ["/dist"],
   "scripts": {
