@@ -25,6 +25,8 @@ SELECT * WHERE {
 }
 ```
 ```
+const { builder } = require('@vterzic/sparql-builder');
+
 const q = new Select()
     .select('*')
     .where('s', 'p', 'o');
@@ -39,6 +41,8 @@ SELECT ?s ?p WHERE {
 }
 ```
 ```
+const { builder } = require('@vterzic/sparql-builder');
+
 const q = builder.selectQuery()
         .select('s', 'p')
         .where('s', 'p', 'o');
@@ -57,6 +61,8 @@ SELECT * WHERE {
 }
 ```
 ```
+const { builder } = require('@vterzic/sparql-builder');
+
 const q = builder.selectQuery()
 .select('*')
 .where('s', 'p', 'o')
@@ -77,6 +83,8 @@ SELECT ?s ?p WHERE {
 } OFFSET 5 LIMIT 10
 ```
 ```
+const { builder } = require('@vterzic/sparql-builder');
+
 const q = builder.selectQuery()
         .select('s', 'p')
         .where('s', 'p', 'o')
@@ -93,6 +101,8 @@ SELECT ?location (SUM(?amount) as ?totalAmount) WHERE {
 } GROUP BY ?location HAVING(?totalAmount > 10) OFFSET 5 LIMIT 10
 ```
 ```
+const { builder, operators: op } = require('@vterzic/sparql-builder');
+
 const q = builder.selectQuery()
         .prefix(op.prefix('schema', op.iri('http://schema.org/')))
         .select('location', op.sum('?amount', 'totalAmount'))
@@ -112,6 +122,8 @@ SELECT * WHERE {
 } ORDER BY DESC(?p) ASC(?o)
 ```
 ```
+const { builder, operators: op } = require('@vterzic/sparql-builder');
+
 const q = builder.selectQuery()
 .select('*')
 .where('s', 'p', 'o')
@@ -132,6 +144,8 @@ SELECT * WHERE {
 }
 ```
 ```
+const { builder, operators: op } = require('@vterzic/sparql-builder');
+
 const q = const q = builder.selectQuery()
     .prefix(op.prefix('schema', 'http://schema.org/'))
     .select('*')
@@ -148,6 +162,8 @@ q.render();
 
 ### Nested queries UNION
 ```
+const { builder } = require('@vterzic/sparql-builder');
+
 PREFIX schema: <http://schema.org/>
 SELECT * WHERE {
   {
@@ -164,6 +180,8 @@ SELECT * WHERE {
 }
 ```
 ```
+const { builder, operators: op } = require('@vterzic/sparql-builder');
+
 const subQuery1 = builder.selectQuery()
     .select('s')
     .where('s', 'schema:name', op.toStringLiteral('example1'));
@@ -197,15 +215,17 @@ SELECT * WHERE {
 }
 ```
 ```
+const { builder, operators: op } = require('@vterzic/sparql-builder');
+
 const subQuery1 = new SelectQuery()
     .select('s')
-    .where('s', 'schema:name', Op.toStringLiteral('example1'));
+    .where('s', 'schema:name', op.toStringLiteral('example1'));
 const subQuery2 = new SelectQuery()
     .select('s')
-    .where('s', 'schema:lastName', Op.toStringLiteral('example2'));
+    .where('s', 'schema:lastName', op.toStringLiteral('example2'));
 
 const q = new SelectQuery()
-    .prefix(Op.prefix('schema', 'http://schema.org/'))
+    .prefix(op.prefix('schema', 'http://schema.org/'))
     .select('*')
     .nest(subQuery1)
     .nest(subQuery2, 'OPTIONAL');
