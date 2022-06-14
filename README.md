@@ -12,7 +12,8 @@ This library was made in order to speed up development process when creation of 
 - CONSTRUCT Query
 - UPDATE Query
 
-
+## Installation
+`npm i @vterzic/sparql-builder`
 ## Examples
 
 Examples can also be found in ./test/select-query.spec.ts
