@@ -11,7 +11,9 @@
     "RDF",
     "rdf",
     "graph",
-    "Graph"
+    "Graph",
+    "javascript",
+    "typescript"
   ],
   "license": "SEE LICENSE IN LICENSE.md",
   "files": [
