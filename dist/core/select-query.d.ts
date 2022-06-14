@@ -12,6 +12,7 @@ export default class SelectQuery {
     private optionals;
     private subQueries;
     private groupByCriteria;
+    private havingClause;
     prefix(prefix: string): SelectQuery;
     select(...variables: string[]): SelectQuery;
     where(subject: string, predicate: string, object: string): SelectQuery;
@@ -22,6 +23,7 @@ export default class SelectQuery {
     optional(optional: Optional): SelectQuery;
     nest(subQuery: SelectQuery, type?: nestedType): SelectQuery;
     groupBy(...groupByCriteria: string[]): SelectQuery;
+    having(expression: string): SelectQuery;
     render(): string;
     private getPrefixes;
     private getSelectVariables;

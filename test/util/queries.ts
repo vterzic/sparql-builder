@@ -59,7 +59,7 @@ const groupByQuery = `PREFIX schema: <http://schema.org/>
 SELECT ?location (SUM(?value1 * ?value2) as ?totalSum) WHERE {
   ?location schema:humidity ?value1 .
   ?location schema:temperature ?value2 .
-} GROUP BY ?location`;
+} GROUP BY ?location HAVING (?totalSum > 10)`;
 
 const unionQuery = `PREFIX schema: <http://schema.org/>
 SELECT * WHERE {

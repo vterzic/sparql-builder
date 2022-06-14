@@ -14,6 +14,7 @@ export default class SelectQuery {
   private optionals: Optional[] = [];
   private subQueries: Array<{ subQuery: SelectQuery; type: nestedType }> = [];
   private groupByCriteria: string[] = [];
+  private havingClause: string;
 
   prefix(prefix: string): SelectQuery {
     this.prefixes.push(prefix);
@@ -62,6 +63,11 @@ export default class SelectQuery {
 
   groupBy(...groupByCriteria: string[]): SelectQuery {
     this.groupByCriteria = groupByCriteria;
+    return this;
+  }
+
+  having(expression: string): SelectQuery {
+    this.havingClause = expression;
     return this;
   }
 
@@ -163,6 +169,10 @@ export default class SelectQuery {
 
     for (const c of this.groupByCriteria) {
       groupBy += ' ' + util.getQueryString(c);
+    }
+
+    if (this.havingClause) {
+      groupBy += ` HAVING (${this.havingClause})`;
     }
 
     return groupBy;

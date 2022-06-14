@@ -56,6 +56,10 @@ class SelectQuery {
         this.groupByCriteria = groupByCriteria;
         return this;
     }
+    having(expression) {
+        this.havingClause = expression;
+        return this;
+    }
     render() {
         return (this.getPrefixes() +
             this.SELECT_KEYWORD +
@@ -129,6 +133,9 @@ class SelectQuery {
         let groupBy = ' GROUP BY';
         for (const c of this.groupByCriteria) {
             groupBy += ' ' + util_1.default.getQueryString(c);
+        }
+        if (this.havingClause) {
+            groupBy += ` HAVING (${this.havingClause})`;
         }
         return groupBy;
     }

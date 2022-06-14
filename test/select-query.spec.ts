@@ -100,7 +100,8 @@ describe('Select query suite', () => {
       .select('location', Op.sum('?value1 * ?value2', 'totalSum'))
       .where('location', 'schema:humidity', 'value1')
       .where('location', 'schema:temperature', 'value2')
-      .groupBy('location');
+      .groupBy('location')
+      .having('?totalSum > 10');
 
     expect(q.render()).to.be.equal(queries.groupByQuery);
   });
