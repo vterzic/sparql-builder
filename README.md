@@ -90,7 +90,7 @@ q.render();
 ```
 SELECT ?location (SUM(?amount) as ?totalAmount) WHERE {
   ?location schema:amount ?amount .
-} GROUP BY ?location OFFSET 5 LIMIT 10
+} GROUP BY ?location HAVING(?totalAmount > 10) OFFSET 5 LIMIT 10
 ```
 ```
 const q = builder.selectQuery()
@@ -98,6 +98,7 @@ const q = builder.selectQuery()
         .select('location', op.sum('?amount', 'totalAmount'))
         .where('location', 'schema:amount', '?amount')
         .groupBy('location')
+        .having('?totalAmount > 10')
         .offset(5)
         .limit(10);
         
